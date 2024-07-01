@@ -1,0 +1,167 @@
+
+
+{% extends "authentication/base.html" %}
+{% block start %}
+
+<div class="container m-5 mx-auto">
+    <form class = "col-6 mx-auto card p-3 shadow-lg" method = 'post'>
+        {% csrf_token %}
+        <h2>Fill the form to get qr code </h2>
+        <hr>
+        {% comment %} use the template below to use the error message {% endcomment %}
+        {% if messages %}
+        <div class="alert alert-primary" role = 'alert'>
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Professor's name</label>
+            <input type="text" name = "pName" class="form-control" readonly value = '{{ request.user.first_name |add:' '|add:request.user.last_name}}' id="exampleInputEmail1" 
+            
+            ria-describedby="emailHelp">
+        </div>
+        
+        <div class="form-group mb-3">
+          <label for="exampleDropdown" class='form-label'>Department</label>
+          <select class="form-control" id="exampleDropdown" name="department">
+            <option value="none">--Select--</option>
+            <option value="Computer Science and Technology">Computer Science and Technology</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Electrical and Telecommunication Engineering">
+              Electrical and Telecommunication Engineering
+            </option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Aerospace Engineering and Applied Mechanics">
+              Aerospace Engineering and Applied Mechanics
+            </option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Architechture and Planning">Architechture and Planning</option>
+            <option value="Mining Engineering">Mining Engineering</option>
+            <option value="Metallurgy and Materials Engineering">Metallurgy and Materials Engineering</option>
+          </select>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="exampleDropdown" class='form-label'>Semester</label>
+        <select class="form-control" id="exampleDropdown" name="semester">
+          <option value="1">Semester 1</option>
+          <option value="2">Semester 2</option>
+          <option value="3">Semester 3</option>
+          <option value="4">Semester 4</option>
+          <option value="5">Semester 5</option>
+          <option value="6">Semester 6</option>
+          <option value="7">Semester 7</option>
+          <option value="8">Semester 8</option>
+        </select>
+      </div>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Subject:</label>
+          <input type="text" class="form-control" name = 'subject' id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Subject Code</label>
+          <input type="text" Required class="form-control" name = 'subcode' id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Institute Email Id</label>
+          <input type="email" readonly value='{{ request.user.email }}' class="form-control" placeholder='abc@gmail.com' name = 'email' id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Class Duration in hours</label>
+          <input type="text"  class="form-control" name = 'duration' id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        
+        
+       
+        <button type="submit" class="btn btn-outline-primary">Generate QR code</button>
+
+      </form>
+    
+    
+</div>
+
+{% endblock %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="qrcode/loginPage.css" />
+  </head>
+  <body>
+    <h1>Professors Login</h1>
+    <form action="/qrCodeForm" method = 'post' autocomplete="on">
+      {% csrf_token %}
+      <div>
+        <label for="pName">Professor's Name:</label>
+        <input type="text" id="pName" name="pName" />
+      </div>
+      <div>
+        <label for="dept">Department: </label>
+        <select name="Department" id="dept">
+          <option value="none">--Select--</option>
+          <option value="Computer Science and Technology">Computer Science and Technology</option>
+          <option value="Civil Engineering">Civil Engineering</option>
+          <option value="Electrical Engineering">Electrical Engineering</option>
+          <option value="Electrical and Telecommunication Engineering">
+            Electrical and Telecommunication Engineering
+          </option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Aerospace Engineering and Applied Mechanics">
+            Aerospace Engineering and Applied Mechanics
+          </option>
+          <option value="Mechanical Engineering">Mechanical Engineering</option>
+          <option value="Architechture and Planning">Architechture and Planning</option>
+          <option value="Mining Engineering">Mining Engineering</option>
+          <option value="Metallurgy and Materials Engineering">Metallurgy and Materials Engineering</option>
+        </select>
+      </div>
+      <div>
+        <label for="sem">Semester: </label>
+        <select name="Semester" id="sem">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+      <div>
+        <label for="subject">Subject: </label>
+        <input name='Subject' type="text" id="subject" />
+      </div>
+      <div>
+        <label for="subCode">Subject Code: </label>
+        <input name = "Subcode" type="text" id="subCode" />
+      </div>
+      <fieldset>
+        <legend>Period Duration</legend>
+        <label for="pFrom">From: </label>
+        <input name = "Pfrom" type="time" id="pFrom" />
+        <label for="pTo">To: </label>
+        <input name= "Pto" type="time" id="pTo" />
+      </fieldset>
+      <div>
+        <label for="email">Professor's Email ID:</label>
+        <input name = "Email" type="email" id="email" />
+      </div>
+      <br>
+      <button type = "submit">Generate QrCode</button>
+    </form>
+    
+  </body>
+</html> {% endcomment %}

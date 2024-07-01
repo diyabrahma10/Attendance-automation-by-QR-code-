@@ -1,0 +1,71 @@
+{% extends "authentication/base.html" %}
+{% block start %}
+
+<div class="container mt-5 mx-auto">
+    <form class = "col-6 mx-auto card p-3 shadow-lg" method = 'post'>
+        {% csrf_token %}
+        <h2>Login</h2>
+
+        {% comment %} use the template below to use the error message {% endcomment %}
+        {% if messages %}
+        <div class="alert alert-primary" role = 'alert'>
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" placeholder='Enter your Username' id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name = 'pass1' class="form-control" placeholder='Enter your Password' id="exampleInputPassword1">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Login</button>
+
+        <p class = "mx-auto">Dont have an account <a href="registerProf ">Register</a></p>
+      </form>
+    
+    
+</div>
+
+{% endblock %}
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Sign In
+    </title>
+</head>
+<body>
+
+    {% for message in messages %}
+    <div class="alert alert-{{messages.tags}} alert-dismissible fade show " role = "alert" >
+    <strong>Message:1 </strong>{{message}}
+    <button type = "button" class = "close" data-dismiss = "alert" aria-label = "Close" >
+    <span aria-hidden = "true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+    <h3>Sign In</h3>
+    <form action="/loginProf" method="post">
+        {% csrf_token %}
+        <label for="Username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your Username">
+        <br>
+        <label for="">Password</label>
+        <input type="password" id="pass1" name="pass1" placeholder="Enter your Password">
+        <br>
+        <button type="submit">Sign In</button>
+    </form>
+</body>
+</html> {% endcomment %}

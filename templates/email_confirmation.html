@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+    Welcome to Miniproject Login 
+    Hello {{ name }}
+    Please Confirm your email by clicking on the following link'
+    {% comment %} Confirmation Link : http://{{ domain }}{% url 'activate' uid = uidb64 token = token %} {% endcomment %}
+    Confirmation Link : http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+    {% comment %} Confirmation Link : http://{{ domain }}/activate/{{ uidb64 }}/{{ token }} {% endcomment %}
+
+
+
+{% endautoescape %}

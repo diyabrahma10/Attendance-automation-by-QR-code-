@@ -1,0 +1,35 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 80px 10px 80px;
+    background: whitesmoke;
+    font-size: x-large;
+}
+
+label{
+    display: inline-block;
+    margin: 30px 10px;
+}
+h1{
+    text-align: center;
+    margin: 0px 80px 10px 80px;
+    color: white;
+    background: black;
+    font-size : xxx-large;
+}
+
+
+/* input{
+    display: inline-block;
+} */
+
+fieldset{
+    display: inline;
+    text-decoration: none;
+}
